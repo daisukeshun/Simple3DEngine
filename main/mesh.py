@@ -18,21 +18,24 @@ class Triangle3D:
         p = self.points
         for i in p:
             i.draw(graphic)
+            print('Triangle')
 
 class Square3D:
     def __init__(self, p1, p2, p3, p4, width, height, focal_length):
+        print(p1, p2, p3, p4)
         self.points = [0, 0, 0, 0]
         self.points[0] = TranslateTo2D(p1, width, height, focal_length)
         self.points[1] = TranslateTo2D(p2, width, height, focal_length)
         self.points[2] = TranslateTo2D(p3, width, height, focal_length)
         self.points[3] = TranslateTo2D(p4, width, height, focal_length)
-
+        print(self.points)
     def draw3D(self, graphic):
         p = self.points
         Line(p[0], p[1]).draw(graphic)
         Line(p[1], p[2]).draw(graphic)
         Line(p[2], p[3]).draw(graphic)
         Line(p[3], p[0]).draw(graphic)
+
 
     def drawPoints(self, graphic):
         p = self.points
@@ -46,6 +49,7 @@ class mesh:
 
     def meshDraw(self, window, width, height, focal_length):
         m = self
+
         for i in m.faces:
             if (len(i) == 3):
                 p1 = m.points[i[0]-1]
@@ -54,8 +58,6 @@ class mesh:
                 tr = Triangle3D(p1, p2, p3, width, height, focal_length)
                 # tr.drawPoints(window)
                 tr.draw3D(window)
-                # print(tr.points)
-                # print(p1, p2, p3)
                 
             elif(len(i) == 4):
                 p1 = m.points[i[0]-1]
@@ -65,8 +67,7 @@ class mesh:
                 sq = Square3D(p1, p2, p3, p4, width, height, focal_length)
                 # sq.drawPoints(window)
                 sq.draw3D(window)
-                # print(sq.points)
-                # print(p1, p2, p3, p4)
+                print(i)
 
     def undrawMesh(self, win):
         for item in win.items[:]:

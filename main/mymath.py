@@ -7,6 +7,19 @@ class Point3D:
         self.z = z/1
 
 
+class Triangle3D:
+    def __init__(self, p1, p2, p3, focal_length, width, height):
+        self.points = []
+        self.points[0] = TranslateTo2D(p1, focal_length, width, height)
+        self.points[1] = TranslateTo2D(p2, focal_length, width, height)
+        self.points[2] = TranslateTo2D(p3, focal_length, width, height)
+        
+    def draw3D(self, graphic):
+        p = self.points
+        Line(p[0], p[1]).draw(graphic)
+        Line(p[1], p[2]).draw(graphic)
+        Line(p[2], p[0]).draw(graphic)
+
 
 def TranslateTo2D(Point3D, focal_length, width, height):
         _x = Point3D.x*(focal_length/Point3D.z) + width/2 

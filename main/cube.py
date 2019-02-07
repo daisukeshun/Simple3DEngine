@@ -3,7 +3,7 @@ from mymath import *
 from mesh import *
 from math import *
 
-W = 1000
+W = 600
 H = 600
 focal_length = 100
 
@@ -14,6 +14,8 @@ def main():
     a.undrawMesh(win)
     a.meshDraw(win, W, H, focal_length)
 
+    pp = Point(0.001*focal_length/0.5+W/2, 0.001*focal_length/0.5+H/2)
+    pp.draw(win)
     win.getMouse()
     win.close()
 

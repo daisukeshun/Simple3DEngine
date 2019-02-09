@@ -10,12 +10,11 @@ focal_length = 100
 def main():
     win = GraphWin("Graph window", W, H)
 
-    a = mesh('45-trees/tree01.obj')
-    a.undrawMesh(win)
-    a.meshDraw(win, W, H, focal_length)
+    # ss = Square3D([100, 200, 2], [100, 100, 2], [200, 100, 2],
+    #               [200, 200, 2],  300, 200, 1000, 0.1)
 
-    # pp = Point(0.001*focal_length/0.5+W/2, 0.001*focal_length/0.5+H/2)
-    # pp.draw(win)
+    # ss = TranslateTo2D(ss, 90, W, H, 1000, 0.1)
+    # ss.draw3D(win)
     win.getMouse()
     win.close()
 

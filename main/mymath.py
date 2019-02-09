@@ -10,15 +10,18 @@ def matmulvec(i_vec, width, height, focal_length):
     print(i_vec[0], i_vec[1], i_vec[2])
     zFar = 1000
     zNear = 0.1
-    w = i_vec[2] + 1
-    _x =(i_vec[0] + 1)*width/height * width/2
-    _y = (i_vec[1] + 1)*width/height * height/2
+    w = i_vec[2] + 3  
+    _x =(i_vec[0])*width/height * width/2
+    _y = (i_vec[1])*width/height * height/2
     _z = i_vec[2] * (zFar/(zFar - zNear)) - zFar*zNear/(zFar - zNear)
     if w != 0:
         _x /= w
         _y /= w
         _z /= w
 
+
+    _x += width/2
+    _y += height/2
     # print(_x, _y, focal_length/2)
     a = Point(_x, _y)
 

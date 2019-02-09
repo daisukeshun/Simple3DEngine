@@ -3,18 +3,31 @@ from mymath import *
 from mesh import *
 from math import *
 
-W = 600
+W = 1000
 H = 600
-focal_length = 100
+focal_length = 90
 
 def main():
     win = GraphWin("Graph window", W, H)
 
-    # ss = Square3D([100, 200, 2], [100, 100, 2], [200, 100, 2],
-    #               [200, 200, 2],  300, 200, 1000, 0.1)
+    a = mesh('Cube/Cube.obj')
+    a.undrawMesh(win)
+    a.meshDraw(win, W, H, focal_length)
 
-    # ss = TranslateTo2D(ss, 90, W, H, 1000, 0.1)
-    # ss.draw3D(win)
+    pp = Point3D(0,0,0)
+    print(pp.coords)
+
+    pp = TranslateTo2D(pp.coords, W, H, 100)
+
+    Ox = Triangle3D([1, 0, 0], [1, 0, 0], [0, 0, 0], W, H, 100)
+    Oy = Triangle3D([0, 1, 0], [0, 1, 0], [0, 0, 0], W, H, 100)
+    Oz = Triangle3D([0, 0, 1], [0, 0, 1], [0, 0, 0], W, H, 100)
+
+
+    Oy.draw3D(win)
+    Oz.draw3D(win)
+    Ox.draw3D(win)
+    pp.draw(win)
     win.getMouse()
     win.close()
 

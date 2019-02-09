@@ -18,7 +18,7 @@ class Triangle3D:
         p = self.points
         for i in p:
             i.draw(graphic)
-            print('Triangle')
+            print(i)
 
 class Square3D:
     def __init__(self, p1, p2, p3, p4, width, height, focal_length):

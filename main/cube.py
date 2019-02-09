@@ -3,7 +3,7 @@ from mymath import *
 from mesh import *
 from math import *
 
-W = 1000
+W = 600
 H = 600
 focal_length = 90
 
@@ -25,8 +25,11 @@ def main():
 
 
     Oy.draw3D(win)
+    Oy.drawPoints(win)
     Oz.draw3D(win)
+    Oz.drawPoints(win)
     Ox.draw3D(win)
+    Ox.drawPoints(win)
     pp.draw(win)
     win.getMouse()
     win.close()

@@ -1,39 +1,34 @@
-from graphics import *
+import pygame
 from mymath import *
 from mesh import *
 from math import *
 
 W = 600
 H = 600
+BLACK = (0,0,0)
 focal_length = 90
 
+
 def main():
-    win = GraphWin("Graph window", W, H)
+    pygame.init()
+    win = pygame.display.set_mode((W, H))
 
-    a = mesh('Cube/Cube.obj')
-    a.undrawMesh(win)
-    a.meshDraw(win, W, H, focal_length)
+    a = mesh('45-trees/tree01.obj')
 
-    pp = Point3D(0,0,0)
-    print(pp.coords)
+    clock = pygame.time.Clock()
+    ss = 0
+    while True:
+        clock.tick(30)
+        for i in pygame.event.get():
+            if i.type == pygame.QUIT:
+                exit()
+        pygame.draw.rect(win, BLACK, (0,0, W, H))
+        a.meshDraw(win, W, H, focal_length, ss)
+        pygame.display.update()
 
-    pp = TranslateTo2D(pp.coords, W, H, 100)
-
-    Ox = Triangle3D([1, 0, 0], [1, 0, 0], [0, 0, 0], W, H, 100)
-    Oy = Triangle3D([0, 1, 0], [0, 1, 0], [0, 0, 0], W, H, 100)
-    Oz = Triangle3D([0, 0, 1], [0, 0, 1], [0, 0, 0], W, H, 100)
-
-
-    Oy.draw3D(win)
-    Oy.drawPoints(win)
-    Oz.draw3D(win)
-    Oz.drawPoints(win)
-    Ox.draw3D(win)
-    Ox.drawPoints(win)
-    pp.draw(win)
-    win.getMouse()
-    win.close()
-
+        ss+=1
+        # pygame.draw.line(win, WHITE, [0,0], [200, 200])
+        
 main()
 
 

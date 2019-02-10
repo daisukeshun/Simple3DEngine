@@ -1,13 +1,12 @@
-from graphics import *
+import pygame
 from math import *
 
 class Point3D:
     def __init__(self, x, y, z):
-        self.coords = [x, y, z]
-
+        self.coords = [x, y, z, 1]
 
 def matmulvec(i_vec, width, height, focal_length):
-    print(i_vec[0], i_vec[1], i_vec[2])
+    # print(i_vec[0], i_vec[1], i_vec[2])
     zFar = 1000
     zNear = 0.1
     w = i_vec[2] + 3
@@ -23,16 +22,22 @@ def matmulvec(i_vec, width, height, focal_length):
     _x += width/2
     _y += height/2
     # print(_x, _y, focal_length/2)
-    a = Point(_x, _y)
+    a = [_x, _y]
 
     return a
 
 
 def mmult(i, m):
     o = []
-    o.append(i[0] * m[0][0] + i[1]*m[1][0] + i[2]*m[2][0])
-    o.append(i[0] * m[0][1] + i[1]*m[1][1] + i[2]*m[2][1])
-    o.append(i[0] * m[0][2] + i[1]*m[1][2] + i[2]*m[2][2])
+    if len(m) == 3:
+        o.append(i[0] * m[0][0] + i[1]*m[1][0] + i[2]*m[2][0])
+        o.append(i[0] * m[0][1] + i[1]*m[1][1] + i[2]*m[2][1])
+        o.append(i[0] * m[0][2] + i[1]*m[1][2] + i[2]*m[2][2])
+    elif len(m) == 4:
+        o.append(i[0] * m[0][0] + i[1]*m[1][0] + i[2]*m[2][0] + i[3]*m[3][0])
+        o.append(i[0] * m[0][1] + i[1]*m[1][1] + i[2]*m[2][1] + i[3]*m[3][0])
+        o.append(i[0] * m[0][2] + i[1]*m[1][2] + i[2]*m[2][2] + i[3]*m[3][0])
+        o.append(i[0] * m[0][2] + i[1]*m[1][2] + i[2]*m[2][2] + i[3]*m[3][0])
     return o
 
 def TranslateTo2D(Point3, width, height, focal_length):
@@ -45,7 +50,7 @@ def rotateX(angle, point):
         [0, cos(angle), -sin(angle)],
         [0, sin(angle), cos(angle)]]    
     res = mmult(point, m)
-    print(res)
+    # print(res)
     return res
 
 
@@ -56,5 +61,16 @@ def rotateY(angle, point):
          [-sin(angle), 0, cos(angle)]]
 
     res = mmult(point, m)
-    print(res)
+    # print(res)
+    return res
+
+def dotProduct(v1, v2):
+    return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2]
+
+def crossProd(v1, v2):
+    res = [
+        v1[1] * v2[2] - v1[2] * v2[1],
+        v1[2] * v2[0] - v1[0] * v2[2],
+        v1[0] * v2[1] - v1[1] * v2[0]
+    ]
     return res

@@ -54,6 +54,10 @@ class mesh:
                 p1 = rotateY(angle, p1)
                 p2 = rotateY(angle, p2)
                 p3 = rotateY(angle, p3)
+                
+                p1 = rotateZ(angle, p1)
+                p2 = rotateZ(angle, p2)
+                p3 = rotateZ(angle, p3)
 
                 v1 = [p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2]]
                 v2 = [p3[0] - p1[0], p3[1] - p1[1], p3[2] - p1[2]]
@@ -78,6 +82,11 @@ class mesh:
                 p2 = rotateY(angle, p2)
                 p3 = rotateY(angle, p3)
                 p4 = rotateY(angle, p4)
+                
+                p1 = rotateZ(angle, p1)
+                p2 = rotateZ(angle, p2)
+                p3 = rotateZ(angle, p3)
+                p4 = rotateZ(angle, p4)
 
                 v1 = [p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2]]
                 v2 = [p3[0] - p1[0], p3[1] - p1[1], p3[2] - p1[2]]

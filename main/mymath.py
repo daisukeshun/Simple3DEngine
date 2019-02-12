@@ -55,7 +55,14 @@ def rotateY(angle, point):
     m = [[cos(angle), 0, sin(angle)],
          [0, 1, 0],
          [-sin(angle), 0, cos(angle)]]
+    res = mmult(point, m)
+    return res
 
+def rotateZ(angle, point):
+    angle = radians(angle)	
+    m = [[cos(angle), -sin(angle), 0 ],
+         [sin(angle), cos(angle), 0 ],
+         [0, 0, 1]];
     res = mmult(point, m)
     return res
 

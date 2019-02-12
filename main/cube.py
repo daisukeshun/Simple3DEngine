@@ -3,7 +3,7 @@ from mymath import *
 from mesh import *
 from math import *
 
-W = 600
+W = 1200
 H = 600
 BLACK = (0,0,0)
 focal_length = 90
@@ -13,7 +13,7 @@ def main():
     pygame.init()
     win = pygame.display.set_mode((W, H))
 
-    a = mesh('45-trees/tree01.obj')
+    a = mesh('tree01.obj')
 
     clock = pygame.time.Clock()
     ss = 0
@@ -27,8 +27,6 @@ def main():
         pygame.display.update()
 
         ss+=1
-        # pygame.draw.line(win, WHITE, [0,0], [200, 200])
-        
 main()
 
 

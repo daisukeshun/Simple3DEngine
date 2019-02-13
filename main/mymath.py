@@ -1,13 +1,14 @@
 import pygame
 from math import *
 
-def matmulvec(i_vec, width, height, focal_length):
+def matmulvec(i_vec, width, height, focal_length, camera):
+    # i_vec = setrelpos(i_vec, camera)
     zFar = 1000
     zNear = 0.1
-    w = i_vec[2]
-    _x =(i_vec[0]) * width/2
-    _y = -(i_vec[1])* width/height * height/2
-    _z = i_vec[2] * (zFar/(zFar - zNear)) - zFar*zNear/(zFar - zNear)
+    w = i_vec[2] + camera[2]
+    _x = (i_vec[0] + camera[0]) * width/2
+    _y = -(i_vec[1] + camera[1]) * width/height * height/2
+    _z = i_vec[2] * (zFar/(zFar - zNear)) - zFar*zNear/(zFar - zNear) + camera[2]
     if w > 0:
         _x /= w
         _y /= w
@@ -16,8 +17,6 @@ def matmulvec(i_vec, width, height, focal_length):
 
     _x += width/2
     _y += height/2
-    if w < 0:
-        print(i_vec[0], i_vec[1], i_vec[2])
     a = [_x, _y]
 
     return a
@@ -36,8 +35,8 @@ def mmult(i, m):
         o.append(i[0] * m[0][2] + i[1]*m[1][2] + i[2]*m[2][2] + i[3]*m[3][0])
     return o
 
-def TranslateTo2D(Point3, width, height, focal_length):
-        res = matmulvec(Point3, width, height, focal_length)
+def TranslateTo2D(Point3, width, height, focal_length, camera):
+        res = matmulvec(Point3, width, height, focal_length, camera)
         # print(res)
         return res
 
@@ -76,3 +75,10 @@ def crossProd(v1, v2):
         v1[0] * v2[1] - v1[1] * v2[0]
     ]
     return res
+
+def setrelpos(p, camera):
+    p[0] += camera[0]
+    p[1] += camera[1]
+    p[2] += camera[2]
+
+    return p

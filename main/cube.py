@@ -1,32 +1,61 @@
 import pygame
+from pygame import *
 from mymath import *
 from mesh import *
 from math import *
 
-W = 1200
-H = 600
-BLACK = (0,0,0)
-focal_length = 90
 
 
 def main():
+    W = 1200
+    H = 600
+    BLACK = (0, 0, 0)
+    focal_length = 90
     pygame.init()
     win = pygame.display.set_mode((W, H))
+    Camera = [0.0,0.0,0.0,0.0]
 
     a = mesh('tree01.obj')
-
+    b = mesh('Cube.obj')
     clock = pygame.time.Clock()
     ss = 0
-    while True:
+    loop = True
+    while loop:
         clock.tick(30)
         for i in pygame.event.get():
-            if i.type == pygame.QUIT:
-                exit()
-        pygame.draw.rect(win, BLACK, (0,0, W, H))
-        a.meshDraw(win, W, H, focal_length, ss)
-        pygame.display.update()
+                if i.type == pygame.QUIT:
+                        loop = False
+                elif i.type == pygame.KEYDOWN and i.key == pygame.K_ESCAPE:
+                        loop = False
+                
+                if i.type == KEYDOWN:
+                        if (i.key == pygame.K_w):
+                                # Camera[2] += 0.2
+                                pass
+                        elif (i.key == pygame.K_a):
+                                pass
+                        elif (i.key == pygame.K_s):
+                                pass
+                        elif (i.key == pygame.K_d):
+                                pass
 
-        ss+=1
+        keys_pressed = pygame.key.get_pressed()
+
+        if keys_pressed[pygame.K_w]:
+                Camera[2] -= 0.2
+        if keys_pressed[pygame.K_a]:
+                # Camera[0] -= 0.2
+                ss -= 1
+        if keys_pressed[pygame.K_s]:
+                Camera[2] += 0.2
+        if keys_pressed[pygame.K_d]:
+                # Camera[0] += 0.2
+                ss += 1
+        pygame.draw.rect(win, BLACK, (0,0, W, H))
+        b.meshDraw(win, W, H, focal_length, ss, Camera)
+        a.meshDraw(win, W, H, focal_length, ss, Camera)
+        # print(Camera)
+        pygame.display.update()
 main()
 
 

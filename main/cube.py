@@ -14,9 +14,10 @@ def main():
     pygame.init()
     win = pygame.display.set_mode((W, H))
     Camera = [0.0,0.0,0.0,0.0]
-
     a = mesh('tree01.obj')
     b = mesh('Cube.obj')
+    c = mesh('tree02.obj')
+    d = mesh('tree03.obj')
     clock = pygame.time.Clock()
     angle = [0,0,0]
     loop = True
@@ -29,14 +30,12 @@ def main():
                         loop = False
 
         keys_pressed = pygame.key.get_pressed()
-        mouse_mv = pygame.mouse.get_rel()
-        # print(mouse_mv[0])
 
-        # if mouse_mv:
-        #         angle[0] += mouse_mv[0]*0.01
-        #         Camera[0] += mouse_mv[0]*0.01
-        #         angle[1] += mouse_mv[1]*0.01
-        #         Camera[1] += mouse_mv[1]*0.01
+
+        mouse_mv = pygame.mouse.get_rel()
+        if mouse_mv:
+                angle[1] += mouse_mv[0]*0.5
+                angle[0] += mouse_mv[1]*0.5
 
 
         if keys_pressed[pygame.K_w]:
@@ -48,22 +47,19 @@ def main():
         if keys_pressed[pygame.K_d]:
                 Camera[0] -= 0.2
         if keys_pressed[pygame.K_LEFT]:
-                Camera[0] += 0.2
-                angle[1] -= 3
+                angle[1] -= 4
         if keys_pressed[pygame.K_RIGHT]:
-                Camera[0] -= 0.2
-                angle[1] += 3
+                angle[1] += 4
         if keys_pressed[pygame.K_UP]:
-                Camera[1] -= 0.2
-                angle[0] -= 3
+                angle[0] -= 4
         if keys_pressed[pygame.K_DOWN]:
-                Camera[1] += 0.2
-                angle[0] += 3
+                angle[0] += 4
 
         pygame.draw.rect(win, BLACK, (0,0, W, H))
         b.meshDraw(win, W, H, focal_length, angle, Camera)
         a.meshDraw(win, W, H, focal_length, angle, Camera)
-        # print(Camera)
+        c.meshDraw(win, W, H, focal_length, angle, Camera)
+        d.meshDraw(win, W, H, focal_length, angle, Camera)
         pygame.display.update()
 main()
 

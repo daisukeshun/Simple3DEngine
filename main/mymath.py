@@ -21,7 +21,7 @@ def TranslateTo2D(Point3, width, height, focal_length, camera):
     _x = (Point3[0] + camera[0])* width/2
     _y = -(Point3[1] + camera[1])* width/height * height/2
     _z = Point3[2] * (zFar/(zFar - zNear)) - zFar*zNear/(zFar - zNear) + camera[2]
-    if w > 0:
+    if w != 0:
         _x /= w
         _y /= w
         _z /= w

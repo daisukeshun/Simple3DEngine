@@ -1,27 +1,6 @@
 import pygame
 from math import *
 
-def matmulvec(i_vec, width, height, focal_length, camera):
-    # i_vec = setrelpos(i_vec, camera)
-    zFar = 1000
-    zNear = 0.1
-    w = i_vec[2] + camera[2]
-    _x = (i_vec[0] + camera[0]) * width/2
-    _y = -(i_vec[1] + camera[1]) * width/height * height/2
-    _z = i_vec[2] * (zFar/(zFar - zNear)) - zFar*zNear/(zFar - zNear) + camera[2]
-    if w > 0:
-        _x /= w
-        _y /= w
-        _z /= w
-
-
-    _x += width/2
-    _y += height/2
-    a = [_x, _y]
-
-    return a
-
-
 def mmult(i, m):
     o = []
     if len(m) == 3:
@@ -36,9 +15,21 @@ def mmult(i, m):
     return o
 
 def TranslateTo2D(Point3, width, height, focal_length, camera):
-        res = matmulvec(Point3, width, height, focal_length, camera)
-        # print(res)
-        return res
+    zFar = 1000
+    zNear = 0.1
+    w = Point3[2] + camera[2]
+    _x = (Point3[0] + camera[0])* width/2
+    _y = -(Point3[1] + camera[1])* width/height * height/2
+    _z = Point3[2] * (zFar/(zFar - zNear)) - zFar*zNear/(zFar - zNear) + camera[2]
+    if w > 0:
+        _x /= w
+        _y /= w
+        _z /= w
+
+    _x += width/2
+    _y += height/2
+    a = [_x, _y]
+    return a
 
 def rotateX(angle, point):
     angle = radians(angle)
@@ -75,10 +66,3 @@ def crossProd(v1, v2):
         v1[0] * v2[1] - v1[1] * v2[0]
     ]
     return res
-
-def setrelpos(p, camera):
-    p[0] += camera[0]
-    p[1] += camera[1]
-    p[2] += camera[2]
-
-    return p

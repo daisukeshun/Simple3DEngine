@@ -48,22 +48,23 @@ class mesh:
                 p3 = m.points[i[2]-1]
                 
                  # Умножение на матрицу поворота    
-                # p1 = rotateX(angle, p1)
-                # p2 = rotateX(angle, p2)
-                # p3 = rotateX(angle, p3)
+                p1 = rotateX(angle[0], p1)
+                p2 = rotateX(angle[0], p2)
+                p3 = rotateX(angle[0], p3)
 
-                p1 = rotateY(angle, p1)
-                p2 = rotateY(angle, p2)
-                p3 = rotateY(angle, p3)
+                p1 = rotateY(angle[1], p1)
+                p2 = rotateY(angle[1], p2)
+                p3 = rotateY(angle[1], p3)
                 
-                # p1 = rotateZ(angle, p1)
-                # p2 = rotateZ(angle, p2)
-                # p3 = rotateZ(angle, p3)
+                p1 = rotateZ(angle[2], p1)
+                p2 = rotateZ(angle[2], p2)
+                p3 = rotateZ(angle[2], p3)
 
                 v1 = [p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2]]
                 v2 = [p3[0] - p1[0], p3[1] - p1[1], p3[2] - p1[2]]
                 n  = crossProd(v1, v2)
-                if (n[2] < 0):
+                if (n[2]*camera[2] + n[1]*camera[1] + n[0]*camera[0] < 0):
+
                     tr = Triangle3D(p1, p2, p3, width, height, focal_length, camera)
                     tr.draw3D(window)
                 
@@ -73,25 +74,25 @@ class mesh:
                 p3 = m.points[i[2]-1]
                 p4 = m.points[i[3]-1]
             
-                # p1 = rotateX(angle, p1)
-                # p2 = rotateX(angle, p2)
-                # p3 = rotateX(angle, p3)
-                # p4 = rotateX(angle, p4) 
+                p1 = rotateX(angle[0], p1)
+                p2 = rotateX(angle[0], p2)
+                p3 = rotateX(angle[0], p3)
+                p4 = rotateX(angle[0], p4) 
 
-                p1 = rotateY(angle, p1)
-                p2 = rotateY(angle, p2)
-                p3 = rotateY(angle, p3)
-                p4 = rotateY(angle, p4)
+                p1 = rotateY(angle[1], p1)
+                p2 = rotateY(angle[1], p2)
+                p3 = rotateY(angle[1], p3)
+                p4 = rotateY(angle[1], p4)
                 
-                # p1 = rotateZ(angle, p1)
-                # p2 = rotateZ(angle, p2)
-                # p3 = rotateZ(angle, p3)
-                # p4 = rotateZ(angle, p4)
+                p1 = rotateZ(angle[2], p1)
+                p2 = rotateZ(angle[2], p2)
+                p3 = rotateZ(angle[2], p3)
+                p4 = rotateZ(angle[2], p4)
 
                 v1 = [p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2]]
                 v2 = [p3[0] - p1[0], p3[1] - p1[1], p3[2] - p1[2]]
                 n = crossProd(v1, v2)
-                if (n[2] < 0):
+                if (n[2]*camera[2] + n[1]*camera[1] + n[0]*camera[0]< 0):
                     sq = Square3D(p1, p2, p3, p4, width, height, focal_length, camera)
                     sq.draw3D(window)        
 
